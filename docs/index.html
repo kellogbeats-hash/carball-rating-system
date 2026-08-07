@@ -140,7 +140,7 @@
         .nick-col { font-weight: 600; color: #2c3e50; }
         .rating-col { font-weight: 700; color: #2980b9; }
         .role-col { font-size: 12px; }
-        /* Responsive column widths - using percentages */
+        /* Responsive column widths */
         .col-rank { width: 2%; }
         .col-nick { width: 8%; min-width: 70px; }
         .col-userid { width: 4%; }
@@ -173,7 +173,6 @@
         .col-defenserel { width: 3%; }
         .col-totalactions { width: 4%; }
 
-        /* Responsive adjustments */
         @media (max-width: 1200px) {
             table.dataTable { font-size: 11px !important; }
             table.dataTable td { font-size: 11px !important; }
@@ -220,7 +219,7 @@
         <input type="text" id="customSearch" placeholder="🔍 Search player nickname... (e.g. fycnamed)">
     </div>
 
-    <!-- TABLE - FULL WIDTH -->
+    <!-- TABLE - UPDATED for quoted CSV -->
     <div class="table-responsive">
         <table id="playersTable" class="display compact stripe" style="width:100%">
             <thead>
@@ -278,6 +277,27 @@
 <script>
 let dataTable;
 
+// Helper: Parse quoted CSV line
+function parseQuotedCSV(line) {
+    const result = [];
+    let current = '';
+    let inQuotes = false;
+    
+    for (let i = 0; i < line.length; i++) {
+        const char = line[i];
+        if (char === '"') {
+            inQuotes = !inQuotes;
+        } else if (char === ',' && !inQuotes) {
+            result.push(current.trim());
+            current = '';
+        } else {
+            current += char;
+        }
+    }
+    result.push(current.trim());
+    return result;
+}
+
 async function loadData() {
     try {
         const response = await fetch('https://raw.githubusercontent.com/pykellog/carball-rating-system/refs/heads/main/data/players.csv');
@@ -294,16 +314,21 @@ async function loadData() {
             throw new Error('CSV file is empty or has only header.');
         }
 
-        const headers = lines[0].split(',').map(h => h.trim());
+        // Parse header (quoted)
+        const headerValues = parseQuotedCSV(lines[0]);
+        const headers = headerValues.map(h => h.replace(/^"|"$/g, '').trim());
+        console.log('Headers:', headers);
+
         const players = [];
 
         for (let i = 1; i < lines.length; i++) {
-            const values = lines[i].split(',');
+            const values = parseQuotedCSV(lines[i]);
             if (values.length < 4) continue;
 
             const player = {};
             headers.forEach((header, index) => {
-                player[header] = values[index] ? values[index].trim() : '';
+                // Remove surrounding quotes and trim
+                player[header] = values[index] ? values[index].replace(/^"|"$/g, '').trim() : '';
             });
             players.push(player);
         }
@@ -311,6 +336,7 @@ async function loadData() {
         if (players.length === 0) {
             throw new Error('No data rows found.');
         }
+        console.log('First player:', players[0]);
 
         const tbody = document.getElementById('tableBody');
         tbody.innerHTML = '';
