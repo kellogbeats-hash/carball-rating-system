@@ -14,14 +14,14 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: #f0f2f5;
             margin: 0;
-            padding: 20px;
+            padding: 15px;
         }
         .container {
             max-width: 1600px;
             margin: auto;
             background: white;
-            padding: 25px 30px;
-            border-radius: 16px;
+            padding: 18px 20px;
+            border-radius: 14px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.08);
         }
         .header {
@@ -30,39 +30,39 @@
             align-items: center;
             flex-wrap: wrap;
             border-bottom: 3px solid #3498db;
-            padding-bottom: 12px;
-            margin-bottom: 20px;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
         }
         .header h1 {
             margin: 0;
             color: #2c3e50;
-            font-size: 24px;
+            font-size: 20px;
         }
         .header .info {
             color: #7f8c8d;
-            font-size: 14px;
+            font-size: 13px;
             background: #ecf0f1;
-            padding: 6px 16px;
+            padding: 4px 14px;
             border-radius: 20px;
         }
         .note {
             background: #eaf4ff;
             border-left: 4px solid #3498db;
-            padding: 12px 18px;
+            padding: 8px 15px;
             border-radius: 6px;
-            font-size: 14px;
+            font-size: 13px;
             color: #2c3e50;
-            margin-bottom: 18px;
+            margin-bottom: 14px;
         }
         .note strong { color: #2980b9; }
         .search-box {
-            margin-bottom: 18px;
+            margin-bottom: 14px;
         }
         .search-box input {
             width: 100%;
-            max-width: 400px;
-            padding: 10px 16px;
-            font-size: 15px;
+            max-width: 350px;
+            padding: 8px 14px;
+            font-size: 14px;
             border: 2px solid #dfe6e9;
             border-radius: 30px;
             outline: none;
@@ -76,19 +76,28 @@
             overflow-x: auto;
         }
         table.dataTable {
-            font-size: 12px;
+            font-size: 10.5px !important;
+            width: 100% !important;
         }
         table.dataTable td, 
         table.dataTable th {
-            padding: 6px 8px !important;
+            padding: 4px 5px !important;
+            white-space: nowrap;
+        }
+        table.dataTable th {
+            font-size: 10px !important;
+            font-weight: 700;
+        }
+        table.dataTable td {
+            font-size: 10.5px !important;
         }
         .badge {
             display: inline-block;
-            padding: 2px 12px;
+            padding: 1px 8px;
             border-radius: 30px;
-            font-size: 11px;
+            font-size: 9.5px;
             font-weight: 700;
-            letter-spacing: 0.3px;
+            letter-spacing: 0.2px;
         }
         .badge-S { background: #ff6b6b; color: #fff; }
         .badge-A { background: #feca57; color: #2d3436; }
@@ -97,12 +106,12 @@
         .badge-D { background: #f368e0; color: #fff; }
         .badge-E { background: #8395a7; color: #fff; }
         .footer {
-            margin-top: 22px;
+            margin-top: 18px;
             text-align: center;
             color: #95a5a6;
-            font-size: 13px;
+            font-size: 12px;
             border-top: 1px solid #ecf0f1;
-            padding-top: 16px;
+            padding-top: 12px;
         }
         .footer a {
             color: #3498db;
@@ -110,12 +119,49 @@
         }
         .footer a:hover { text-decoration: underline; }
         .dataTables_wrapper .dataTables_filter { display: none; }
+        .dataTables_wrapper .dataTables_length { display: none; }
+        .dataTables_wrapper .dataTables_info { font-size: 11px !important; }
+        .dataTables_wrapper .dataTables_paginate { font-size: 11px !important; }
+        .dataTables_wrapper .dataTables_paginate .paginate_button {
+            padding: 2px 8px !important;
+        }
         .rank-col { font-weight: 600; color: #2c3e50; }
-        .nick-col { font-weight: 600; color: #2c3e50; }
+        .nick-col { font-weight: 600; color: #2c3e50; max-width: 100px; overflow: hidden; text-overflow: ellipsis; }
         .rating-col { font-weight: 700; color: #2980b9; }
-        .role-col { font-size: 12px; }
-        .stat-col { font-family: monospace; font-size: 11px; }
-        .highlight { background: #fff3cd; }
+        .role-col { font-size: 9.5px; }
+        .stat-col { font-family: monospace; font-size: 10px; }
+        /* Column width adjustments */
+        .col-rank { width: 30px; }
+        .col-nick { width: 90px; }
+        .col-userid { width: 60px; }
+        .col-rating { width: 45px; }
+        .col-skill { width: 50px; }
+        .col-multiplier { width: 45px; }
+        .col-role { width: 100px; }
+        .col-tier { width: 55px; }
+        .col-matches { width: 45px; }
+        .col-wins { width: 40px; }
+        .col-losses { width: 40px; }
+        .col-winrate { width: 40px; }
+        .col-wlratio { width: 40px; }
+        .col-goalspg { width: 40px; }
+        .col-assistspg { width: 40px; }
+        .col-savespg { width: 40px; }
+        .col-ogpg { width: 35px; }
+        .col-totalgoals { width: 45px; }
+        .col-totalassists { width: 45px; }
+        .col-totalsaves { width: 45px; }
+        .col-totalog { width: 35px; }
+        .col-mvpcount { width: 40px; }
+        .col-mvpwin { width: 40px; }
+        .col-offensive { width: 40px; }
+        .col-defensive { width: 40px; }
+        .col-playmaker { width: 40px; }
+        .col-efficiency { width: 40px; }
+        .col-impact { width: 40px; }
+        .col-gkindex { width: 40px; }
+        .col-defenserel { width: 40px; }
+        .col-totalactions { width: 50px; }
     </style>
 </head>
 <body>
@@ -132,9 +178,8 @@
 
     <!-- NOTE -->
     <div class="note">
-        💡 This data is from the <strong>FFS Gaming</strong> MTA server's CarBall players.
-        Search by nickname or click on any column header to sort.
-        <br>🔍 <strong>Tip:</strong> Scroll horizontally to see all statistics.
+        💡 Data from <strong>FFS Gaming</strong> MTA CarBall server. Search by nickname or click column headers to sort.
+        <span style="float:right;">🔍 <strong>Tip:</strong> All stats visible at once!</span>
     </div>
 
     <!-- SEARCH -->
@@ -142,42 +187,42 @@
         <input type="text" id="customSearch" placeholder="🔍 Search player nickname... (e.g. fycnamed)">
     </div>
 
-    <!-- TABLE - UPDATED: Removed MVP_Efficiency and Goal_Assist_Ratio -->
+    <!-- TABLE - COMPACT VERSION -->
     <div class="table-responsive">
-        <table id="playersTable" class="display" style="width:100%">
+        <table id="playersTable" class="display compact" style="width:100%">
             <thead>
                 <tr>
-                    <th>#</th>
-                    <th>Nick</th>
-                    <th>UserID</th>
-                    <th>Rating</th>
-                    <th>Raw Skill</th>
-                    <th>Multiplier</th>
-                    <th>Role</th>
-                    <th>Tier</th>
-                    <th>Matches</th>
-                    <th>Wins</th>
-                    <th>Losses</th>
-                    <th>Win %</th>
-                    <th>W/L Ratio</th>
-                    <th>Goals/G</th>
-                    <th>Assists/G</th>
-                    <th>Saves/G</th>
-                    <th>OG/G</th>
-                    <th>Total Goals</th>
-                    <th>Total Assists</th>
-                    <th>Total Saves</th>
-                    <th>Total OG</th>
-                    <th>MVP Count</th>
-                    <th>MVP/Win %</th>
-                    <th>Offensive %</th>
-                    <th>Defensive %</th>
-                    <th>Playmaker %</th>
-                    <th>Efficiency</th>
-                    <th>Impact</th>
-                    <th>GK Index</th>
-                    <th>Defense Rel.</th>
-                    <th>Total Actions</th>
+                    <th class="col-rank">#</th>
+                    <th class="col-nick">Nick</th>
+                    <th class="col-userid">ID</th>
+                    <th class="col-rating">⭐</th>
+                    <th class="col-skill">Skill</th>
+                    <th class="col-multiplier">×</th>
+                    <th class="col-role">Role</th>
+                    <th class="col-tier">Tier</th>
+                    <th class="col-matches">M</th>
+                    <th class="col-wins">W</th>
+                    <th class="col-losses">L</th>
+                    <th class="col-winrate">W%</th>
+                    <th class="col-wlratio">W/L</th>
+                    <th class="col-goalspg">G/G</th>
+                    <th class="col-assistspg">A/G</th>
+                    <th class="col-savespg">S/G</th>
+                    <th class="col-ogpg">OG/G</th>
+                    <th class="col-totalgoals">TG</th>
+                    <th class="col-totalassists">TA</th>
+                    <th class="col-totalsaves">TS</th>
+                    <th class="col-totalog">TOG</th>
+                    <th class="col-mvpcount">MVP</th>
+                    <th class="col-mvpwin">MVP%</th>
+                    <th class="col-offensive">Off%</th>
+                    <th class="col-defensive">Def%</th>
+                    <th class="col-playmaker">Play%</th>
+                    <th class="col-efficiency">Eff</th>
+                    <th class="col-impact">Imp</th>
+                    <th class="col-gkindex">GK%</th>
+                    <th class="col-defenserel">DefR</th>
+                    <th class="col-totalactions">Act</th>
                 </tr>
             </thead>
             <tbody id="tableBody">
@@ -202,14 +247,12 @@ let dataTable;
 
 async function loadData() {
     try {
-        // Use the raw GitHub URL for reliability
         const response = await fetch('https://raw.githubusercontent.com/pykellog/carball-rating-system/refs/heads/main/data/players.csv');
         if (!response.ok) {
             throw new Error(`HTTP ${response.status}: ${response.statusText}`);
         }
         const csvText = await response.text();
 
-        // Split into lines, trim and filter empty
         const lines = csvText.split('\n')
             .map(line => line.trim())
             .filter(line => line.length > 0);
@@ -218,12 +261,9 @@ async function loadData() {
             throw new Error('CSV file is empty or has only header.');
         }
 
-        // Get headers
         const headers = lines[0].split(',').map(h => h.trim());
-        console.log('Headers:', headers); // For debugging
-
-        // Parse data
         const players = [];
+
         for (let i = 1; i < lines.length; i++) {
             const values = lines[i].split(',');
             if (values.length < 4) continue;
@@ -238,9 +278,7 @@ async function loadData() {
         if (players.length === 0) {
             throw new Error('No data rows found.');
         }
-        console.log('First player:', players[0]); // For debugging
 
-        // Populate table
         const tbody = document.getElementById('tableBody');
         tbody.innerHTML = '';
 
@@ -256,7 +294,7 @@ async function loadData() {
             const tr = document.createElement('tr');
             tr.innerHTML = `
                 <td class="rank-col">${index + 1}</td>
-                <td class="nick-col">${player['Nick'] || '?'}</td>
+                <td class="nick-col" title="${player['Nick'] || '?'}">${player['Nick'] || '?'}</td>
                 <td>${player['UserID'] || '?'}</td>
                 <td class="rating-col">${player['Rating'] || '?'}</td>
                 <td>${player['Raw_Skill'] || '?'}</td>
@@ -290,19 +328,21 @@ async function loadData() {
             tbody.appendChild(tr);
         });
 
-        // Initialize DataTable - Default sort by Rank (column 0)
         dataTable = $('#playersTable').DataTable({
             pageLength: 25,
-            scrollX: true,
+            scrollX: false, // Disable horizontal scroll
             autoWidth: false,
             language: {
                 url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/en-GB.json'
             },
-            order: [[0, 'asc']], // Sort by Rank (column 0) ascending
+            order: [[0, 'asc']],
             searching: true,
             columnDefs: [
-                { type: 'num', targets: 0 } // Ensure Rank is treated as number
-            ]
+                { type: 'num', targets: 0 }
+            ],
+            // Compact display
+            dom: '<"top"f>rt<"bottom"lip>',
+            pagingType: 'simple_numbers'
         });
 
         // Custom search box
@@ -310,10 +350,8 @@ async function loadData() {
             dataTable.search(this.value).draw();
         });
 
-        // Update player count
         document.getElementById('playerCount').textContent = players.length;
 
-        // Get last update from metadata
         try {
             const metaRes = await fetch('data/metadata.json');
             if (metaRes.ok) {
@@ -332,21 +370,12 @@ async function loadData() {
                 <td colspan="31" style="padding: 30px; color: #e74c3c; text-align: center;">
                     ⚠️ Error loading data<br>
                     <small style="color: #888;">${error.message}</small>
-                    <br><br>
-                    <strong style="color: #2c3e50;">Troubleshooting:</strong>
-                    <ol style="text-align: left; max-width: 500px; margin: 10px auto; color: #555;">
-                        <li>Make sure 'data/players.csv' exists in your repository</li>
-                        <li>Check if the CSV is UTF-8 encoded</li>
-                        <li>Verify the header row is correct</li>
-                        <li>Open browser console (F12) for more details</li>
-                    </ol>
                 </td>
             </tr>
         `;
     }
 }
 
-// Load data when page loads
 $(document).ready(function() {
     loadData();
 });
