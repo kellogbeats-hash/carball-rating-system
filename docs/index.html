@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MTA CarBall Oyuncu Sıralaması</title>
+    <title>MTA CarBall Player Rankings</title>
     
     <!-- DataTables CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
@@ -17,7 +17,7 @@
             padding: 20px;
         }
         .container {
-            max-width: 1400px;
+            max-width: 1600px;
             margin: auto;
             background: white;
             padding: 25px 30px;
@@ -76,7 +76,11 @@
             overflow-x: auto;
         }
         table.dataTable {
-            font-size: 13px;
+            font-size: 12px;
+        }
+        table.dataTable td, 
+        table.dataTable th {
+            padding: 6px 8px !important;
         }
         .badge {
             display: inline-block;
@@ -106,12 +110,11 @@
         }
         .footer a:hover { text-decoration: underline; }
         .dataTables_wrapper .dataTables_filter { display: none; }
-        td, th { white-space: nowrap; }
         .rank-col { font-weight: 600; color: #2c3e50; }
         .nick-col { font-weight: 600; color: #2c3e50; }
         .rating-col { font-weight: 700; color: #2980b9; }
         .role-col { font-size: 12px; }
-        .stat-col { font-family: monospace; font-size: 12px; }
+        .stat-col { font-family: monospace; font-size: 11px; }
     </style>
 </head>
 <body>
@@ -119,55 +122,75 @@
 <div class="container">
     <!-- HEADER -->
     <div class="header">
-        <h1>🚗 MTA CarBall Oyuncu Sıralaması</h1>
+        <h1>🚗 MTA CarBall Player Rankings</h1>
         <div class="info">
-            📊 <span id="playerCount">0</span> oyuncu &nbsp;|&nbsp;
+            📊 <span id="playerCount">0</span> players &nbsp;|&nbsp;
             📅 <span id="lastUpdate">-</span>
         </div>
     </div>
 
     <!-- NOTE -->
     <div class="note">
-        💡 Bu veriler <strong>FFS Gaming</strong> sunucusundaki CarBall oyuncularının istatistikleridir. 
-        İsim aratarak veya sütun başlıklarına tıklayarak sıralama yapabilirsiniz.
+        💡 This data is from the <strong>FFS Gaming</strong> MTA server's CarBall players.
+        Search by nickname or click on any column header to sort.
+        <br>🔍 <strong>Tip:</strong> Scroll horizontally to see all statistics.
     </div>
 
     <!-- SEARCH -->
     <div class="search-box">
-        <input type="text" id="customSearch" placeholder="🔍 Oyuncu Nick ara... (örn: fycnamed)">
+        <input type="text" id="customSearch" placeholder="🔍 Search player nickname... (e.g. fycnamed)">
     </div>
 
-    <!-- TABLE -->
+    <!-- TABLE - EXACT CSV ORDER -->
     <div class="table-responsive">
         <table id="playersTable" class="display" style="width:100%">
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>👤 Nick</th>
-                    <th>⭐ Rating</th>
-                    <th>🎭 Rol</th>
-                    <th>🏷️ Tier</th>
-                    <th>📊 Maç</th>
-                    <th>🏆 Win %</th>
-                    <th>👑 MVP/Win</th>
-                    <th>⚽ Gol</th>
-                    <th>🎯 Asist</th>
-                    <th>🧤 Kurtarış</th>
-                    <th>💀 KK Gol</th>
-                    <th>📈 Skill</th>
-                    <th>🔄 Çarpan</th>
+                    <th>Nick</th>
+                    <th>UserID</th>
+                    <th>Rating</th>
+                    <th>Raw Skill</th>
+                    <th>Multiplier</th>
+                    <th>Role</th>
+                    <th>Tier</th>
+                    <th>Matches</th>
+                    <th>Wins</th>
+                    <th>Losses</th>
+                    <th>Win %</th>
+                    <th>W/L Ratio</th>
+                    <th>Goals/G</th>
+                    <th>Assists/G</th>
+                    <th>Saves/G</th>
+                    <th>OG/G</th>
+                    <th>Total Goals</th>
+                    <th>Total Assists</th>
+                    <th>Total Saves</th>
+                    <th>Total OG</th>
+                    <th>MVP Count</th>
+                    <th>MVP/Win %</th>
+                    <th>MVP Eff.</th>
+                    <th>Offensive %</th>
+                    <th>Defensive %</th>
+                    <th>Playmaker %</th>
+                    <th>Efficiency</th>
+                    <th>Impact</th>
+                    <th>GK Index</th>
+                    <th>G/A Ratio</th>
+                    <th>Defense Rel.</th>
+                    <th>Total Actions</th>
                 </tr>
             </thead>
             <tbody id="tableBody">
-                <!-- JS ile doldurulacak -->
+                <!-- Populated by JavaScript -->
             </tbody>
         </table>
     </div>
 
     <!-- FOOTER -->
     <div class="footer">
-        Veriler <a href="#" target="_blank">FFS Gaming</a> sunucusundan alınmıştır.
-        Son güncelleme: <span id="footerUpdate">-</span>
+        Data sourced from <a href="#" target="_blank">FFS Gaming</a> MTA server.
+        Last updated: <span id="footerUpdate">-</span>
     </div>
 </div>
 
@@ -186,8 +209,8 @@ async function loadData() {
         const lines = csvText.split('\n').filter(line => line.trim());
         if (lines.length < 2) {
             document.getElementById('tableBody').innerHTML =
-                `<tr><td colspan="14" style="text-align:center; padding:30px; color:#e74c3c;">
-                    ⚠️ Veri dosyası boş veya okunamıyor.
+                `<tr><td colspan="33" style="text-align:center; padding:30px; color:#e74c3c;">
+                    ⚠️ Data file is empty or unreadable.
                 </td></tr>`;
             return;
         }
@@ -221,53 +244,111 @@ async function loadData() {
             tr.innerHTML = `
                 <td class="rank-col">${index + 1}</td>
                 <td class="nick-col">${row['Nick'] || '?'}</td>
+                <td>${row['UserID'] || '?'}</td>
                 <td class="rating-col">${row['Rating'] || '?'}</td>
+                <td>${row['Raw_Skill'] || '?'}</td>
+                <td>${row['Multiplier'] || '?'}</td>
                 <td class="role-col">${row['Role'] || '?'}</td>
                 <td><span class="badge badge-${tierClass}">${tier}</span></td>
                 <td>${row['Matches'] || '?'}</td>
+                <td>${row['Wins'] || '?'}</td>
+                <td>${row['Losses'] || '?'}</td>
                 <td>${row['Win_Rate'] || '?'}%</td>
-                <td>${row['MVP_Per_Win'] || '?'}%</td>
+                <td>${row['Win_Loss_Ratio'] || '?'}</td>
+                <td>${row['Goals_PG'] || '?'}</td>
+                <td>${row['Assists_PG'] || '?'}</td>
+                <td>${row['Saves_PG'] || '?'}</td>
+                <td>${row['OwnGoals_PG'] || '?'}</td>
                 <td>${row['Total_Goals'] || '?'}</td>
                 <td>${row['Total_Assists'] || '?'}</td>
                 <td>${row['Total_Saves'] || '?'}</td>
                 <td>${row['Total_OwnGoals'] || '?'}</td>
-                <td>${row['Raw_Skill'] || '?'}</td>
-                <td>${row['Multiplier'] || '?'}</td>
+                <td>${row['MVP_Count'] || '?'}</td>
+                <td>${row['MVP_Per_Win'] || '?'}%</td>
+                <td>${row['MVP_Efficiency'] || '?'}%</td>
+                <td>${row['Offensive_Ratio'] || '?'}%</td>
+                <td>${row['Defensive_Ratio'] || '?'}%</td>
+                <td>${row['Playmaker_Ratio'] || '?'}%</td>
+                <td>${row['Efficiency'] || '?'}</td>
+                <td>${row['Impact'] || '?'}</td>
+                <td>${row['Goalkeeping_Index'] || '?'}%</td>
+                <td>${row['Goal_Assist_Ratio'] || '?'}</td>
+                <td>${row['Defense_Reliability'] || '?'}</td>
+                <td>${row['Total_Actions'] || '?'}</td>
             `;
             tbody.appendChild(tr);
         });
 
+        // Initialize DataTable
         dataTable = $('#playersTable').DataTable({
             pageLength: 25,
+            scrollX: true,
+            autoWidth: false,
             language: {
-                url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/tr.json'
+                url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/en-GB.json'
             },
-            order: [[2, 'desc']],
-            searching: true
+            order: [[3, 'desc']], // Sort by Rating (column index 3)
+            searching: true,
+            columnDefs: [
+                { width: '40px', targets: 0 },
+                { width: '100px', targets: 1 },
+                { width: '70px', targets: 2 },
+                { width: '70px', targets: 3 },
+                { width: '70px', targets: 4 },
+                { width: '70px', targets: 5 },
+                { width: '150px', targets: 6 },
+                { width: '100px', targets: 7 },
+                { width: '70px', targets: 8 },
+                { width: '60px', targets: 9 },
+                { width: '60px', targets: 10 },
+                { width: '70px', targets: 11 },
+                { width: '70px', targets: 12 },
+                { width: '70px', targets: 13 },
+                { width: '70px', targets: 14 },
+                { width: '70px', targets: 15 },
+                { width: '70px', targets: 16 },
+                { width: '80px', targets: 17 },
+                { width: '80px', targets: 18 },
+                { width: '80px', targets: 19 },
+                { width: '80px', targets: 20 },
+                { width: '80px', targets: 21 },
+                { width: '80px', targets: 22 },
+                { width: '80px', targets: 23 },
+                { width: '80px', targets: 24 },
+                { width: '80px', targets: 25 },
+                { width: '80px', targets: 26 },
+                { width: '70px', targets: 27 },
+                { width: '70px', targets: 28 },
+                { width: '80px', targets: 29 },
+                { width: '70px', targets: 30 },
+                { width: '70px', targets: 31 },
+                { width: '80px', targets: 32 }
+            ]
         });
 
+        // Custom search box
         $('#customSearch').on('keyup', function() {
             dataTable.search(this.value).draw();
         });
 
         document.getElementById('playerCount').textContent = rows.length;
 
-        // Metadata'dan tarih al
+        // Get last update from metadata
         try {
             const metaRes = await fetch('data/metadata.json');
             const meta = await metaRes.json();
-            const date = meta.lastUpdate || 'Bilinmiyor';
+            const date = meta.lastUpdate || 'Unknown';
             document.getElementById('lastUpdate').textContent = date;
             document.getElementById('footerUpdate').textContent = date;
         } catch (e) {
-            document.getElementById('lastUpdate').textContent = 'Bilinmiyor';
-            document.getElementById('footerUpdate').textContent = 'Bilinmiyor';
+            document.getElementById('lastUpdate').textContent = 'Unknown';
+            document.getElementById('footerUpdate').textContent = 'Unknown';
         }
 
     } catch (error) {
         document.getElementById('tableBody').innerHTML =
-            `<tr><td colspan="14" style="text-align:center; padding:40px; color:#e74c3c;">
-                ⚠️ Veriler yüklenirken hata oluştu.<br>
+            `<tr><td colspan="33" style="text-align:center; padding:40px; color:#e74c3c;">
+                ⚠️ Error loading data.<br>
                 <small style="color:#95a5a6;">${error.message}</small>
             </td></tr>`;
     }
