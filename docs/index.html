@@ -114,7 +114,6 @@
         .nick-col { font-weight: 600; color: #2c3e50; }
         .rating-col { font-weight: 700; color: #2980b9; }
         .role-col { font-size: 12px; }
-        .stat-col { font-family: monospace; font-size: 11px; }
     </style>
 </head>
 <body>
@@ -141,7 +140,7 @@
         <input type="text" id="customSearch" placeholder="🔍 Search player nickname... (e.g. fycnamed)">
     </div>
 
-    <!-- TABLE - EXACT CSV ORDER -->
+    <!-- TABLE - EXACT CSV ORDER (33 COLUMNS) -->
     <div class="table-responsive">
         <table id="playersTable" class="display" style="width:100%">
             <thead>
@@ -288,42 +287,7 @@ async function loadData() {
                 url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/en-GB.json'
             },
             order: [[3, 'desc']], // Sort by Rating (column index 3)
-            searching: true,
-            columnDefs: [
-                { width: '40px', targets: 0 },
-                { width: '100px', targets: 1 },
-                { width: '70px', targets: 2 },
-                { width: '70px', targets: 3 },
-                { width: '70px', targets: 4 },
-                { width: '70px', targets: 5 },
-                { width: '150px', targets: 6 },
-                { width: '100px', targets: 7 },
-                { width: '70px', targets: 8 },
-                { width: '60px', targets: 9 },
-                { width: '60px', targets: 10 },
-                { width: '70px', targets: 11 },
-                { width: '70px', targets: 12 },
-                { width: '70px', targets: 13 },
-                { width: '70px', targets: 14 },
-                { width: '70px', targets: 15 },
-                { width: '70px', targets: 16 },
-                { width: '80px', targets: 17 },
-                { width: '80px', targets: 18 },
-                { width: '80px', targets: 19 },
-                { width: '80px', targets: 20 },
-                { width: '80px', targets: 21 },
-                { width: '80px', targets: 22 },
-                { width: '80px', targets: 23 },
-                { width: '80px', targets: 24 },
-                { width: '80px', targets: 25 },
-                { width: '80px', targets: 26 },
-                { width: '70px', targets: 27 },
-                { width: '70px', targets: 28 },
-                { width: '80px', targets: 29 },
-                { width: '70px', targets: 30 },
-                { width: '70px', targets: 31 },
-                { width: '80px', targets: 32 }
-            ]
+            searching: true
         });
 
         // Custom search box
