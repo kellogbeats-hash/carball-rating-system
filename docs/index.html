@@ -9,20 +9,24 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
     
     <style>
-        * { box-sizing: border-box; }
-        body {
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html, body {
+            width: 100%;
+            height: 100%;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: #f0f2f5;
             margin: 0;
-            padding: 15px;
+            padding: 0;
         }
         .container {
-            max-width: 1600px;
-            margin: auto;
+            width: 100%;
+            max-width: 100%;
+            margin: 0;
+            padding: 12px 15px;
             background: white;
-            padding: 18px 20px;
-            border-radius: 14px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border-radius: 0;
+            box-shadow: none;
+            min-height: 100vh;
         }
         .header {
             display: flex;
@@ -30,19 +34,19 @@
             align-items: center;
             flex-wrap: wrap;
             border-bottom: 3px solid #3498db;
-            padding-bottom: 10px;
-            margin-bottom: 15px;
+            padding-bottom: 8px;
+            margin-bottom: 12px;
         }
         .header h1 {
             margin: 0;
             color: #2c3e50;
-            font-size: 20px;
+            font-size: 22px;
         }
         .header .info {
             color: #7f8c8d;
-            font-size: 13px;
+            font-size: 14px;
             background: #ecf0f1;
-            padding: 4px 14px;
+            padding: 4px 16px;
             border-radius: 20px;
         }
         .note {
@@ -52,17 +56,21 @@
             border-radius: 6px;
             font-size: 13px;
             color: #2c3e50;
-            margin-bottom: 14px;
+            margin-bottom: 12px;
         }
         .note strong { color: #2980b9; }
+        .note .tip { float: right; }
+        @media (max-width: 768px) {
+            .note .tip { float: none; display: block; margin-top: 4px; }
+        }
         .search-box {
-            margin-bottom: 14px;
+            margin-bottom: 12px;
         }
         .search-box input {
             width: 100%;
-            max-width: 350px;
-            padding: 8px 14px;
-            font-size: 14px;
+            max-width: 400px;
+            padding: 9px 16px;
+            font-size: 15px;
             border: 2px solid #dfe6e9;
             border-radius: 30px;
             outline: none;
@@ -74,28 +82,31 @@
         }
         .table-responsive {
             overflow-x: auto;
+            width: 100%;
         }
         table.dataTable {
-            font-size: 10.5px !important;
+            font-size: 13px !important;
             width: 100% !important;
         }
         table.dataTable td, 
         table.dataTable th {
-            padding: 4px 5px !important;
+            padding: 6px 6px !important;
             white-space: nowrap;
         }
         table.dataTable th {
-            font-size: 10px !important;
+            font-size: 12px !important;
             font-weight: 700;
+            background: #2c3e50;
+            color: white;
         }
         table.dataTable td {
-            font-size: 10.5px !important;
+            font-size: 13px !important;
         }
         .badge {
             display: inline-block;
-            padding: 1px 8px;
+            padding: 1px 10px;
             border-radius: 30px;
-            font-size: 9.5px;
+            font-size: 11px;
             font-weight: 700;
             letter-spacing: 0.2px;
         }
@@ -106,10 +117,10 @@
         .badge-D { background: #f368e0; color: #fff; }
         .badge-E { background: #8395a7; color: #fff; }
         .footer {
-            margin-top: 18px;
+            margin-top: 16px;
             text-align: center;
             color: #95a5a6;
-            font-size: 12px;
+            font-size: 13px;
             border-top: 1px solid #ecf0f1;
             padding-top: 12px;
         }
@@ -120,48 +131,70 @@
         .footer a:hover { text-decoration: underline; }
         .dataTables_wrapper .dataTables_filter { display: none; }
         .dataTables_wrapper .dataTables_length { display: none; }
-        .dataTables_wrapper .dataTables_info { font-size: 11px !important; }
-        .dataTables_wrapper .dataTables_paginate { font-size: 11px !important; }
+        .dataTables_wrapper .dataTables_info { font-size: 13px !important; padding: 6px 0 !important; }
+        .dataTables_wrapper .dataTables_paginate { font-size: 13px !important; }
         .dataTables_wrapper .dataTables_paginate .paginate_button {
-            padding: 2px 8px !important;
+            padding: 3px 10px !important;
         }
         .rank-col { font-weight: 600; color: #2c3e50; }
-        .nick-col { font-weight: 600; color: #2c3e50; max-width: 100px; overflow: hidden; text-overflow: ellipsis; }
+        .nick-col { font-weight: 600; color: #2c3e50; }
         .rating-col { font-weight: 700; color: #2980b9; }
-        .role-col { font-size: 9.5px; }
-        .stat-col { font-family: monospace; font-size: 10px; }
-        /* Column width adjustments */
-        .col-rank { width: 30px; }
-        .col-nick { width: 90px; }
-        .col-userid { width: 60px; }
-        .col-rating { width: 45px; }
-        .col-skill { width: 50px; }
-        .col-multiplier { width: 45px; }
-        .col-role { width: 100px; }
-        .col-tier { width: 55px; }
-        .col-matches { width: 45px; }
-        .col-wins { width: 40px; }
-        .col-losses { width: 40px; }
-        .col-winrate { width: 40px; }
-        .col-wlratio { width: 40px; }
-        .col-goalspg { width: 40px; }
-        .col-assistspg { width: 40px; }
-        .col-savespg { width: 40px; }
-        .col-ogpg { width: 35px; }
-        .col-totalgoals { width: 45px; }
-        .col-totalassists { width: 45px; }
-        .col-totalsaves { width: 45px; }
-        .col-totalog { width: 35px; }
-        .col-mvpcount { width: 40px; }
-        .col-mvpwin { width: 40px; }
-        .col-offensive { width: 40px; }
-        .col-defensive { width: 40px; }
-        .col-playmaker { width: 40px; }
-        .col-efficiency { width: 40px; }
-        .col-impact { width: 40px; }
-        .col-gkindex { width: 40px; }
-        .col-defenserel { width: 40px; }
-        .col-totalactions { width: 50px; }
+        .role-col { font-size: 12px; }
+        /* Responsive column widths - using percentages */
+        .col-rank { width: 2%; }
+        .col-nick { width: 8%; min-width: 70px; }
+        .col-userid { width: 4%; }
+        .col-rating { width: 3%; }
+        .col-skill { width: 4%; }
+        .col-multiplier { width: 3%; }
+        .col-role { width: 10%; min-width: 80px; }
+        .col-tier { width: 4%; }
+        .col-matches { width: 3%; }
+        .col-wins { width: 3%; }
+        .col-losses { width: 3%; }
+        .col-winrate { width: 3%; }
+        .col-wlratio { width: 3%; }
+        .col-goalspg { width: 3%; }
+        .col-assistspg { width: 3%; }
+        .col-savespg { width: 3%; }
+        .col-ogpg { width: 3%; }
+        .col-totalgoals { width: 3%; }
+        .col-totalassists { width: 3%; }
+        .col-totalsaves { width: 3%; }
+        .col-totalog { width: 3%; }
+        .col-mvpcount { width: 3%; }
+        .col-mvpwin { width: 3%; }
+        .col-offensive { width: 3%; }
+        .col-defensive { width: 3%; }
+        .col-playmaker { width: 3%; }
+        .col-efficiency { width: 3%; }
+        .col-impact { width: 3%; }
+        .col-gkindex { width: 3%; }
+        .col-defenserel { width: 3%; }
+        .col-totalactions { width: 4%; }
+
+        /* Responsive adjustments */
+        @media (max-width: 1200px) {
+            table.dataTable { font-size: 11px !important; }
+            table.dataTable td { font-size: 11px !important; }
+            table.dataTable th { font-size: 10px !important; }
+            .role-col { font-size: 10px; }
+            .badge { font-size: 9px; padding: 1px 6px; }
+            .col-nick { min-width: 60px; }
+            .col-role { min-width: 65px; }
+        }
+        @media (max-width: 768px) {
+            table.dataTable { font-size: 9px !important; }
+            table.dataTable td { font-size: 9px !important; }
+            table.dataTable th { font-size: 8px !important; }
+            table.dataTable td, table.dataTable th { padding: 3px 3px !important; }
+            .badge { font-size: 7px; padding: 1px 4px; }
+            .col-nick { min-width: 40px; }
+            .col-role { min-width: 40px; }
+            .header h1 { font-size: 16px; }
+            .header .info { font-size: 11px; }
+            .search-box input { font-size: 13px; padding: 6px 12px; }
+        }
     </style>
 </head>
 <body>
@@ -178,8 +211,8 @@
 
     <!-- NOTE -->
     <div class="note">
-        💡 Data from <strong>FFS Gaming</strong> MTA CarBall server. Search by nickname or click column headers to sort.
-        <span style="float:right;">🔍 <strong>Tip:</strong> All stats visible at once!</span>
+        💡 Data from <strong>FFS Gaming</strong> MTA CarBall server.
+        <span class="tip">🔍 Search by nickname or click column headers to sort</span>
     </div>
 
     <!-- SEARCH -->
@@ -187,9 +220,9 @@
         <input type="text" id="customSearch" placeholder="🔍 Search player nickname... (e.g. fycnamed)">
     </div>
 
-    <!-- TABLE - COMPACT VERSION -->
+    <!-- TABLE - FULL WIDTH -->
     <div class="table-responsive">
-        <table id="playersTable" class="display compact" style="width:100%">
+        <table id="playersTable" class="display compact stripe" style="width:100%">
             <thead>
                 <tr>
                     <th class="col-rank">#</th>
@@ -330,7 +363,7 @@ async function loadData() {
 
         dataTable = $('#playersTable').DataTable({
             pageLength: 25,
-            scrollX: false, // Disable horizontal scroll
+            scrollX: false,
             autoWidth: false,
             language: {
                 url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/en-GB.json'
@@ -340,12 +373,10 @@ async function loadData() {
             columnDefs: [
                 { type: 'num', targets: 0 }
             ],
-            // Compact display
             dom: '<"top"f>rt<"bottom"lip>',
             pagingType: 'simple_numbers'
         });
 
-        // Custom search box
         $('#customSearch').on('keyup', function() {
             dataTable.search(this.value).draw();
         });
