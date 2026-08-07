@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MTA CarBall Oyuncu Sıralaması</title>
+    
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f2f5;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1400px;
+            margin: auto;
+            background: white;
+            padding: 25px 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 12px;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            margin: 0;
+            color: #2c3e50;
+            font-size: 24px;
+        }
+        .header .info {
+            color: #7f8c8d;
+            font-size: 14px;
+            background: #ecf0f1;
+            padding: 6px 16px;
+            border-radius: 20px;
+        }
+        .note {
+            background: #eaf4ff;
+            border-left: 4px solid #3498db;
+            padding: 12px 18px;
+            border-radius: 6px;
+            font-size: 14px;
+            color: #2c3e50;
+            margin-bottom: 18px;
+        }
+        .note strong { color: #2980b9; }
+        .search-box {
+            margin-bottom: 18px;
+        }
+        .search-box input {
+            width: 100%;
+            max-width: 400px;
+            padding: 10px 16px;
+            font-size: 15px;
+            border: 2px solid #dfe6e9;
+            border-radius: 30px;
+            outline: none;
+            transition: 0.2s;
+        }
+        .search-box input:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52,152,219,0.15);
+        }
+        .table-responsive {
+            overflow-x: auto;
+        }
+        table.dataTable {
+            font-size: 13px;
+        }
+        .badge {
+            display: inline-block;
+            padding: 2px 12px;
+            border-radius: 30px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+        .badge-S { background: #ff6b6b; color: #fff; }
+        .badge-A { background: #feca57; color: #2d3436; }
+        .badge-B { background: #48dbfb; color: #2d3436; }
+        .badge-C { background: #1dd1a1; color: #fff; }
+        .badge-D { background: #f368e0; color: #fff; }
+        .badge-E { background: #8395a7; color: #fff; }
+        .footer {
+            margin-top: 22px;
+            text-align: center;
+            color: #95a5a6;
+            font-size: 13px;
+            border-top: 1px solid #ecf0f1;
+            padding-top: 16px;
+        }
+        .footer a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        .footer a:hover { text-decoration: underline; }
+        .dataTables_wrapper .dataTables_filter { display: none; }
+        td, th { white-space: nowrap; }
+        .rank-col { font-weight: 600; color: #2c3e50; }
+        .nick-col { font-weight: 600; color: #2c3e50; }
+        .rating-col { font-weight: 700; color: #2980b9; }
+        .role-col { font-size: 12px; }
+        .stat-col { font-family: monospace; font-size: 12px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- HEADER -->
+    <div class="header">
+        <h1>🚗 MTA CarBall Oyuncu Sıralaması</h1>
+        <div class="info">
+            📊 <span id="playerCount">0</span> oyuncu &nbsp;|&nbsp;
+            📅 <span id="lastUpdate">-</span>
+        </div>
+    </div>
+
+    <!-- NOTE -->
+    <div class="note">
+        💡 Bu veriler <strong>FFS Gaming</strong> sunucusundaki CarBall oyuncularının istatistikleridir. 
+        İsim aratarak veya sütun başlıklarına tıklayarak sıralama yapabilirsiniz.
+    </div>
+
+    <!-- SEARCH -->
+    <div class="search-box">
+        <input type="text" id="customSearch" placeholder="🔍 Oyuncu Nick ara... (örn: fycnamed)">
+    </div>
+
+    <!-- TABLE -->
+    <div class="table-responsive">
+        <table id="playersTable" class="display" style="width:100%">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>👤 Nick</th>
+                    <th>⭐ Rating</th>
+                    <th>🎭 Rol</th>
+                    <th>🏷️ Tier</th>
+                    <th>📊 Maç</th>
+                    <th>🏆 Win %</th>
+                    <th>👑 MVP/Win</th>
+                    <th>⚽ Gol</th>
+                    <th>🎯 Asist</th>
+                    <th>🧤 Kurtarış</th>
+                    <th>💀 KK Gol</th>
+                    <th>📈 Skill</th>
+                    <th>🔄 Çarpan</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+                <!-- JS ile doldurulacak -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        Veriler <a href="#" target="_blank">FFS Gaming</a> sunucusundan alınmıştır.
+        Son güncelleme: <span id="footerUpdate">-</span>
+    </div>
+</div>
+
+<!-- jQuery + DataTables -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+<script>
+let dataTable;
+
+async function loadData() {
+    try {
+        const response = await fetch('data/players.csv');
+        const csvText = await response.text();
+
+        const lines = csvText.split('\n').filter(line => line.trim());
+        if (lines.length < 2) {
+            document.getElementById('tableBody').innerHTML =
+                `<tr><td colspan="14" style="text-align:center; padding:30px; color:#e74c3c;">
+                    ⚠️ Veri dosyası boş veya okunamıyor.
+                </td></tr>`;
+            return;
+        }
+
+        const headers = lines[0].split(',').map(h => h.trim());
+        const rows = [];
+
+        for (let i = 1; i < lines.length; i++) {
+            const values = lines[i].split(',');
+            if (values.length < headers.length) continue;
+            const row = {};
+            headers.forEach((h, idx) => {
+                row[h] = values[idx] ? values[idx].trim() : '';
+            });
+            rows.push(row);
+        }
+
+        const tbody = document.getElementById('tableBody');
+        tbody.innerHTML = '';
+
+        rows.forEach((row, index) => {
+            const tier = row['Tier'] || 'E-Tier';
+            let tierClass = 'E';
+            if (tier.includes('S')) tierClass = 'S';
+            else if (tier.includes('A')) tierClass = 'A';
+            else if (tier.includes('B')) tierClass = 'B';
+            else if (tier.includes('C')) tierClass = 'C';
+            else if (tier.includes('D')) tierClass = 'D';
+
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td class="rank-col">${index + 1}</td>
+                <td class="nick-col">${row['Nick'] || '?'}</td>
+                <td class="rating-col">${row['Rating'] || '?'}</td>
+                <td class="role-col">${row['Role'] || '?'}</td>
+                <td><span class="badge badge-${tierClass}">${tier}</span></td>
+                <td>${row['Matches'] || '?'}</td>
+                <td>${row['Win_Rate'] || '?'}%</td>
+                <td>${row['MVP_Per_Win'] || '?'}%</td>
+                <td>${row['Total_Goals'] || '?'}</td>
+                <td>${row['Total_Assists'] || '?'}</td>
+                <td>${row['Total_Saves'] || '?'}</td>
+                <td>${row['Total_OwnGoals'] || '?'}</td>
+                <td>${row['Raw_Skill'] || '?'}</td>
+                <td>${row['Multiplier'] || '?'}</td>
+            `;
+            tbody.appendChild(tr);
+        });
+
+        dataTable = $('#playersTable').DataTable({
+            pageLength: 25,
+            language: {
+                url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/tr.json'
+            },
+            order: [[2, 'desc']],
+            searching: true
+        });
+
+        $('#customSearch').on('keyup', function() {
+            dataTable.search(this.value).draw();
+        });
+
+        document.getElementById('playerCount').textContent = rows.length;
+
+        // Metadata'dan tarih al
+        try {
+            const metaRes = await fetch('data/metadata.json');
+            const meta = await metaRes.json();
+            const date = meta.lastUpdate || 'Bilinmiyor';
+            document.getElementById('lastUpdate').textContent = date;
+            document.getElementById('footerUpdate').textContent = date;
+        } catch (e) {
+            document.getElementById('lastUpdate').textContent = 'Bilinmiyor';
+            document.getElementById('footerUpdate').textContent = 'Bilinmiyor';
+        }
+
+    } catch (error) {
+        document.getElementById('tableBody').innerHTML =
+            `<tr><td colspan="14" style="text-align:center; padding:40px; color:#e74c3c;">
+                ⚠️ Veriler yüklenirken hata oluştu.<br>
+                <small style="color:#95a5a6;">${error.message}</small>
+            </td></tr>`;
+    }
+}
+
+$(document).ready(function() {
+    loadData();
+});
+</script>
+
+</body>
+</html>
