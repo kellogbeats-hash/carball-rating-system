@@ -10,7 +10,7 @@ Bu belge, CarBall oyuncu derecelendirme sisteminin **tam ve şeffaf bir açıkla
 
 ---
 
-## 🎯 SİSTEME GENEL BAKIŞ
+## SİSTEME GENEL BAKIŞ
 
 ### Temel Formül
 
@@ -32,7 +32,7 @@ SON DERECELENDİRME = HAM YETENEK × DENEYİM ÇARPANI
 
 ---
 
-## 📊 HAM YETENEK HESAPLAMASI (1.0 - 10.0)
+## HAM YETENEK HESAPLAMASI (1.0 - 10.0)
 
 Ham Yetenek, **6 ağırlıklı kriter** aracılığıyla saf performansı ölçer. Her kriterin maksimum katkısı vardır ve hepsi toplanır.
 
@@ -184,7 +184,7 @@ def deneyim_carpani_hesapla(toplam_maç):
 
 ---
 
-## 🎭 TAKTİK ROL BELİRLEME
+## TAKTİK ROL BELİRLEME
 
 Oyuncular, istatistiklerine göre 3 ana role ve alt kategorilere ayrılır. Bu, oyuncuların kendi rol bağlamlarında değerlendirilmesini sağlar.
 
@@ -308,7 +308,7 @@ if toplam_maç >= 10000:
 
 ---
 
-## 🏷️ KADEME SİSTEMİ
+## KADEME SİSTEMİ
 
 Son derecelendirme, kolay görsel tanımlama için bir kademeye dönüştürülür:
 
@@ -341,7 +341,7 @@ def puandan_kademe_hesapla(puan):
 
 ---
 
-## 🔍 TAM ÖRNEK: "keLLog"
+## TAM ÖRNEK: "keLLog"
 
 Gerçek bir oyuncu için tüm hesaplamayı adım adım inceleyelim.
 
@@ -482,7 +482,7 @@ MVP: 1481 (%34)
 
 ---
 
-## 📊 SONUÇLARIN ANALİZİ
+## SONUÇLARIN ANALİZİ
 
 ### Neden 7.9 Puan?
 
@@ -520,7 +520,7 @@ MVP: 1481 (%34)
 
 ---
 
-## 🔄 TAM SÜREÇ AKIŞI
+## TAM SÜREÇ AKIŞI
 
 ```
 1. GİRİŞ: Ham İstatistikler
@@ -565,7 +565,7 @@ MVP: 1481 (%34)
 
 ---
 
-## 🔬 BU SİSTEM NEDEN ÇALIŞIYOR?
+## BU SİSTEM NEDEN ÇALIŞIYOR?
 
 ### 1. Dengeli Kriterler
 
@@ -606,7 +606,7 @@ MVP: 1481 (%34)
 
 ---
 
-## 📝 TERİMLER SÖZLÜĞÜ
+## TERİMLER SÖZLÜĞÜ
 
 | Terim | Tanım |
 |-------|-------|
@@ -622,7 +622,7 @@ MVP: 1481 (%34)
 
 ---
 
-## 💡 TASARIM FELSEFESİ
+## TASARIM FELSEFESİ
 
 ### Adalet
 
@@ -646,7 +646,7 @@ Temel formül anlaşılacak kadar basit, ancak doğru olacak kadar kapsamlıdır
 
 ---
 
-## 🔧 UYGULAMA NOTLARI
+## UYGULAMA NOTLARI
 
 ### Veri Gereksinimleri
 
@@ -677,7 +677,7 @@ Sistem, oyuncu başına bu ham istatistikleri gerektirir:
 
 ---
 
-## 📈 SİSTEM SINIRLAMALARI
+## SİSTEM SINIRLAMALARI
 
 - **Statik Ağırlıklar:** Kriter ağırlıkları sabittir ve uyarlanmaz
 - **Oyuncu Etkileşimi Yok:** Takım arkadaşlarını/rakipleri hesaba katmaz
@@ -685,16 +685,9 @@ Sistem, oyuncu başına bu ham istatistikleri gerektirir:
 - **Maç Bağlamı:** Maç önemini dikkate almaz
 - **Zaman Azalması:** Eski maçlar yeniler kadar sayılır
 
-### Gelecek İyileştirmeler
-
-- Metaya göre dinamik ağırlıklar
-- Zamanla performans azalması
-- Takım kimyası faktörleri
-- Rakip gücü ayarlaması
-
 ---
 
-## ✅ SİSTEM AVANTAJLARI
+## SİSTEM AVANTAJLARI
 
 - **Kapsamlı:** Hücum, savunma ve etkiyi kapsar
 - **Rol Bilinçli:** Farklı roller farklı değerlendirilir
