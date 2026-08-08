@@ -140,7 +140,7 @@
         .nick-col { font-weight: 600; color: #2c3e50; }
         .rating-col { font-weight: 700; color: #2980b9; }
         .role-col { font-size: 12px; }
-        /* Responsive column widths */
+        /* Column widths */
         .col-rank { width: 2%; }
         .col-nick { width: 8%; min-width: 70px; }
         .col-userid { width: 4%; }
@@ -219,7 +219,7 @@
         <input type="text" id="customSearch" placeholder="🔍 Search player nickname... (e.g. fycnamed)">
     </div>
 
-    <!-- TABLE - UPDATED for quoted CSV -->
+    <!-- TABLE -->
     <div class="table-responsive">
         <table id="playersTable" class="display compact stripe" style="width:100%">
             <thead>
@@ -265,7 +265,7 @@
 
     <!-- FOOTER -->
     <div class="footer">
-        Data sourced from <strong>FFS Gaming</strong> MTA server.
+        Data sourced from <a href="#" target="_blank">FFS Gaming</a> MTA server.
         Last updated: <span id="footerUpdate">-</span>
     </div>
 </div>
@@ -276,6 +276,19 @@
 
 <script>
 let dataTable;
+
+// Helper: Escape HTML special characters to prevent XSS
+function escapeHtml(text) {
+    if (!text) return '?';
+    const map = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#039;'
+    };
+    return String(text).replace(/[&<>"']/g, function(m) { return map[m]; });
+}
 
 // Helper: Parse quoted CSV line
 function parseQuotedCSV(line) {
@@ -317,7 +330,6 @@ async function loadData() {
         // Parse header (quoted)
         const headerValues = parseQuotedCSV(lines[0]);
         const headers = headerValues.map(h => h.replace(/^"|"$/g, '').trim());
-        console.log('Headers:', headers);
 
         const players = [];
 
@@ -327,7 +339,6 @@ async function loadData() {
 
             const player = {};
             headers.forEach((header, index) => {
-                // Remove surrounding quotes and trim
                 player[header] = values[index] ? values[index].replace(/^"|"$/g, '').trim() : '';
             });
             players.push(player);
@@ -336,7 +347,6 @@ async function loadData() {
         if (players.length === 0) {
             throw new Error('No data rows found.');
         }
-        console.log('First player:', players[0]);
 
         const tbody = document.getElementById('tableBody');
         tbody.innerHTML = '';
@@ -350,39 +360,43 @@ async function loadData() {
             else if (tier.includes('C')) tierClass = 'C';
             else if (tier.includes('D')) tierClass = 'D';
 
+            // ESCAPE NICKNAME to prevent HTML injection
+            const safeNick = escapeHtml(player['Nick'] || '?');
+            const safeRole = escapeHtml(player['Role'] || '?');
+
             const tr = document.createElement('tr');
             tr.innerHTML = `
                 <td class="rank-col">${index + 1}</td>
-                <td class="nick-col" title="${player['Nick'] || '?'}">${player['Nick'] || '?'}</td>
-                <td>${player['UserID'] || '?'}</td>
-                <td class="rating-col">${player['Rating'] || '?'}</td>
-                <td>${player['Raw_Skill'] || '?'}</td>
-                <td>${player['Multiplier'] || '?'}</td>
-                <td class="role-col">${player['Role'] || '?'}</td>
-                <td><span class="badge badge-${tierClass}">${tier}</span></td>
-                <td>${player['Matches'] || '?'}</td>
-                <td>${player['Wins'] || '?'}</td>
-                <td>${player['Losses'] || '?'}</td>
-                <td>${player['Win_Rate'] || '?'}%</td>
-                <td>${player['Win_Loss_Ratio'] || '?'}</td>
-                <td>${player['Goals_PG'] || '?'}</td>
-                <td>${player['Assists_PG'] || '?'}</td>
-                <td>${player['Saves_PG'] || '?'}</td>
-                <td>${player['OwnGoals_PG'] || '?'}</td>
-                <td>${player['Total_Goals'] || '?'}</td>
-                <td>${player['Total_Assists'] || '?'}</td>
-                <td>${player['Total_Saves'] || '?'}</td>
-                <td>${player['Total_OwnGoals'] || '?'}</td>
-                <td>${player['MVP_Count'] || '?'}</td>
-                <td>${player['MVP_Per_Win'] || '?'}%</td>
-                <td>${player['Offensive_Ratio'] || '?'}%</td>
-                <td>${player['Defensive_Ratio'] || '?'}%</td>
-                <td>${player['Playmaker_Ratio'] || '?'}%</td>
-                <td>${player['Efficiency'] || '?'}</td>
-                <td>${player['Impact'] || '?'}</td>
-                <td>${player['Goalkeeping_Index'] || '?'}%</td>
-                <td>${player['Defense_Reliability'] || '?'}</td>
-                <td>${player['Total_Actions'] || '?'}</td>
+                <td class="nick-col" title="${safeNick}">${safeNick}</td>
+                <td>${escapeHtml(player['UserID'] || '?')}</td>
+                <td class="rating-col">${escapeHtml(player['Rating'] || '?')}</td>
+                <td>${escapeHtml(player['Raw_Skill'] || '?')}</td>
+                <td>${escapeHtml(player['Multiplier'] || '?')}</td>
+                <td class="role-col">${safeRole}</td>
+                <td><span class="badge badge-${tierClass}">${escapeHtml(tier)}</span></td>
+                <td>${escapeHtml(player['Matches'] || '?')}</td>
+                <td>${escapeHtml(player['Wins'] || '?')}</td>
+                <td>${escapeHtml(player['Losses'] || '?')}</td>
+                <td>${escapeHtml(player['Win_Rate'] || '?')}%</td>
+                <td>${escapeHtml(player['Win_Loss_Ratio'] || '?')}</td>
+                <td>${escapeHtml(player['Goals_PG'] || '?')}</td>
+                <td>${escapeHtml(player['Assists_PG'] || '?')}</td>
+                <td>${escapeHtml(player['Saves_PG'] || '?')}</td>
+                <td>${escapeHtml(player['OwnGoals_PG'] || '?')}</td>
+                <td>${escapeHtml(player['Total_Goals'] || '?')}</td>
+                <td>${escapeHtml(player['Total_Assists'] || '?')}</td>
+                <td>${escapeHtml(player['Total_Saves'] || '?')}</td>
+                <td>${escapeHtml(player['Total_OwnGoals'] || '?')}</td>
+                <td>${escapeHtml(player['MVP_Count'] || '?')}</td>
+                <td>${escapeHtml(player['MVP_Per_Win'] || '?')}%</td>
+                <td>${escapeHtml(player['Offensive_Ratio'] || '?')}%</td>
+                <td>${escapeHtml(player['Defensive_Ratio'] || '?')}%</td>
+                <td>${escapeHtml(player['Playmaker_Ratio'] || '?')}%</td>
+                <td>${escapeHtml(player['Efficiency'] || '?')}</td>
+                <td>${escapeHtml(player['Impact'] || '?')}</td>
+                <td>${escapeHtml(player['Goalkeeping_Index'] || '?')}%</td>
+                <td>${escapeHtml(player['Defense_Reliability'] || '?')}</td>
+                <td>${escapeHtml(player['Total_Actions'] || '?')}</td>
             `;
             tbody.appendChild(tr);
         });
