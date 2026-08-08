@@ -5,12 +5,6 @@
 [![English](https://img.shields.io/badge/🇬🇧_English-README-blue?style=for-the-badge)](docs/en/README.md)
 [![Türkçe](https://img.shields.io/badge/🇹🇷_Türkçe-README-red?style=for-the-badge)](docs/tr/README.md)
 
-<br>
-
-![GitHub stars](https://img.shields.io/github/stars/pykellog/carball-rating-system?style=social)
-![GitHub forks](https://img.shields.io/github/forks/pykellog/carball-rating-system?style=social)
-![GitHub watchers](https://img.shields.io/github/watchers/pykellog/carball-rating-system?style=social)
-
 ---
 
 ## View Player Rankings / Oyuncu Sıralamasını Görüntüle
@@ -83,35 +77,8 @@
 
 ---
 
-## 📝 License / Lisans
-
-This project is licensed under the **MIT License**.  
-See the [LICENSE](LICENSE) file for details.
-
-Bu proje **MIT Lisansı** ile lisanslanmıştır.  
-Detaylar için [LICENSE](LICENSE) dosyasına bakın.
-
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
----
-
-## 👨‍💻 Developer / Geliştirici
-
-**Developed by / Geliştiren: [keLLog](https://github.com/pykellog)**
-
-[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/pykellog)
-
----
-
 ## 📅 Last Updated / Son Güncelleme
 
 **August 2026 / Ağustos 2026**
-
----
-
-### ⭐ Star this repo if you find it useful!
-### ⭐ Faydalı bulduysanız bu depoyu yıldızlayın!
-
-[![Star](https://img.shields.io/badge/⭐_Star_this_repo-ffd700?style=for-the-badge)](https://github.com/pykellog/carball-rating-system)
 
 </div>
