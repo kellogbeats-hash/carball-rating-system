@@ -377,7 +377,7 @@ async function loadData() {
             tr.innerHTML = `
                 <td class="rank-col">${index + 1}</td>
                 <td class="nick-col" title="${safeNick}">${safeNick}</td>
-                <td>${escapeHtml(player['UserID'] || '?')}</td>
+                <td><a href="https://ffs.gg/members/${escapeHtml(player['UserID'] || '')}" target="_blank" rel="noopener noreferrer" title="FFS Gaming profilini aç">${escapeHtml(player['UserID'] || '?')}</a></td>
                 <td class="rating-col">${escapeHtml(player['Rating'] || '?')}</td>
                 <td>${escapeHtml(player['Raw_Skill'] || '?')}</td>
                 <td>${escapeHtml(player['Multiplier'] || '?')}</td>
