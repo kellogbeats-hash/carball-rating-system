@@ -5,12 +5,6 @@
 [![English](https://img.shields.io/badge/🇬🇧_English-README-blue?style=for-the-badge)](docs/en/README.md)
 [![Türkçe](https://img.shields.io/badge/🇹🇷_Türkçe-README-red?style=for-the-badge)](docs/tr/README.md)
 
-<br>
-
-![GitHub stars](https://img.shields.io/github/stars/pykellog/carball-rating-system?style=social)
-![GitHub forks](https://img.shields.io/github/forks/pykellog/carball-rating-system?style=social)
-![GitHub watchers](https://img.shields.io/github/watchers/pykellog/carball-rating-system?style=social)
-
 </div>
 
 ---
@@ -80,21 +74,6 @@
 
 ---
 
-## 📈 Statistics / İstatistikler
-
-<div align="center">
-
-| Metric | Value |
-|:---:|:---:|
-| 👥 **Total Players** | 468 |
-| 🏆 **Top Rating** | 10.0 |
-| ⭐ **S-Tier Players** | 13 |
-| 📊 **Total Matches** | 3.5M+ |
-
-</div>
-
----
-
 ## 🔧 Quick Links / Hızlı Bağlantılar
 
 <div align="center">
@@ -102,7 +81,7 @@
 | 📖 Documentation | 🌐 Player Rankings |
 |:---:|:---:|
 | [![English Docs](https://img.shields.io/badge/🇬🇧_English_Docs-2c3e50?style=for-the-badge)](docs/en/README.md) | [![View Rankings](https://img.shields.io/badge/📊_View_Rankings-3498db?style=for-the-badge)](https://pykellog.github.io/carball-rating-system/) |
-| [![Türkçe Doküman](https://img.shields.io/badge/🇹🇷_Türkçe_Doküman-2c3e50?style=for-the-badge)](docs/tr/README.md) | [![Short Link](https://img.shields.io/badge/🔗_Short_Link-2ecc71?style=for-the-badge)](https://tinyurl.com/ffs-carball) |
+| [![Türkçe Doküman](https://img.shields.io/badge/🇹🇷_Türkçe_Doküman-2c3e50?style=for-the-badge)](docs/tr/README.md) | [![Short Link](https://img.shields.io/badge/🔗_Short_Link-2ecc71?style=for-the-badge)](https://tinyurl.com/ffscbstats) |
 
 </div>
 
