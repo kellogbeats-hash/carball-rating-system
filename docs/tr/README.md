@@ -1,5 +1,3 @@
-<div align="center">
-
 # MTA CarBall Derecelendirme Sistemi - Tam Puanlama Motoru
 
 ## Bu Belge Hakkında
@@ -704,5 +702,3 @@ Sistem, oyuncu başına bu ham istatistikleri gerektirir:
 Bu belge, CarBall derecelendirme sisteminin tam, detaylı açıklamasını sunmaktadır. Tüm hesaplamalar doğrulama ve iyileştirme için açıktır.
 
 **Son Güncelleme:** Ağustos 2026
-
-</div>
