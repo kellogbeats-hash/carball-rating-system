@@ -1,16 +1,16 @@
-# 🚗 MTA CarBall Rating System - Complete Scoring Engine
+# MTA CarBall Rating System - Complete Scoring Engine
 
-## 📌 About This Document
+## About This Document
 
-This document provides a **complete, transparent explanation** of the CarBall player rating system used on the FFS Gaming MTA San Andreas server.
+This document provides a **complete and transparent explanation** of the CarBall player rating system.
 
-**Purpose:** To fully disclose how player ratings are calculated. Anyone can examine, understand, and implement this system in their own server.
+**Purpose:** A full explanation of how player ratings are calculated.
 
-> **Note:** This is a documentation of the calculation engine, not a runnable software project. The logic is explained in detail so everyone can verify and understand the system.
+> **Note:** This is not an executable software project, but rather documentation for the computing engine. The logic is explained in detail so that anyone can verify and understand the system.
 
 ---
 
-## 🎯 SYSTEM OVERVIEW
+## SYSTEM OVERVIEW
 
 ### The Core Formula
 
@@ -32,7 +32,7 @@ FINAL RATING = RAW SKILL × EXPERIENCE MULTIPLIER
 
 ---
 
-## 📊 RAW SKILL CALCULATION (1.0 - 10.0)
+## RAW SKILL CALCULATION (1.0 - 10.0)
 
 Raw Skill measures pure performance through **6 weighted criteria**. Each criterion has a maximum contribution, and all are summed together.
 
@@ -124,7 +124,7 @@ final_skill = min(max(raw_skill, 1.0), 10.0)
 
 ---
 
-## 📈 EXPERIENCE MULTIPLIER (0.0 - 1.15)
+## EXPERIENCE MULTIPLIER (0.0 - 1.15)
 
 Experience multiplier rewards players who have played more matches. It ensures that experience matters while still allowing new players to compete.
 
@@ -184,7 +184,7 @@ def calculate_experience_multiplier(total_games):
 
 ---
 
-## 🎭 TACTICAL ROLE DETERMINATION
+## TACTICAL ROLE DETERMINATION
 
 Players are classified into 3 main roles with sub-categories based on their statistics. This ensures that players are evaluated within their role context.
 
@@ -309,7 +309,7 @@ if total_games >= 10000:
 
 ---
 
-## 🏷️ TIER SYSTEM
+## TIER SYSTEM
 
 Final rating is converted to a tier for easy visual identification:
 
@@ -342,7 +342,7 @@ def calculate_tier_from_rating(rating):
 
 ---
 
-## 🔍 COMPLETE EXAMPLE: "keLLog"
+## COMPLETE EXAMPLE: "keLLog"
 
 Let's walk through the complete calculation for a real player.
 
@@ -483,7 +483,7 @@ Stats: Saves: 19651 - Goals: 6528 - Assists: 3398 - Own Goals: 1623
 
 ---
 
-## 📊 BREAKDOWN OF RESULTS
+## BREAKDOWN OF RESULTS
 
 ### Why 7.9 Rating?
 
@@ -521,7 +521,7 @@ Stats: Saves: 19651 - Goals: 6528 - Assists: 3398 - Own Goals: 1623
 
 ---
 
-## 🔄 COMPLETE PROCESS FLOW
+## COMPLETE PROCESS FLOW
 
 ```
 1. INPUT: Raw Statistics
@@ -566,7 +566,7 @@ Stats: Saves: 19651 - Goals: 6528 - Assists: 3398 - Own Goals: 1623
 
 ---
 
-## 🔬 WHY THIS SYSTEM WORKS
+## WHY THIS SYSTEM WORKS
 
 ### 1. Balanced Criteria
 
@@ -607,7 +607,7 @@ Stats: Saves: 19651 - Goals: 6528 - Assists: 3398 - Own Goals: 1623
 
 ---
 
-## 📝 GLOSSARY
+## GLOSSARY
 
 | Term | Definition |
 |------|------------|
@@ -623,7 +623,7 @@ Stats: Saves: 19651 - Goals: 6528 - Assists: 3398 - Own Goals: 1623
 
 ---
 
-## 💡 DESIGN PHILOSOPHY
+## DESIGN PHILOSOPHY
 
 ### Fairness
 
@@ -647,7 +647,7 @@ The core formula is simple enough to understand, yet comprehensive enough to be 
 
 ---
 
-## 🔧 IMPLEMENTATION NOTES
+## IMPLEMENTATION NOTES
 
 ### Data Requirements
 
@@ -678,7 +678,7 @@ The system requires these raw statistics per player:
 
 ---
 
-## 📈 SYSTEM LIMITATIONS
+## SYSTEM LIMITATIONS
 
 - **Static Weights:** Criteria weights are fixed and don't adapt
 - **No Player Interaction:** Doesn't account for teammates/opponents
@@ -695,7 +695,7 @@ The system requires these raw statistics per player:
 
 ---
 
-## ✅ SYSTEM ADVANTAGES
+## SYSTEM ADVANTAGES
 
 - **Comprehensive:** Covers attack, defense, and impact
 - **Role-Aware:** Different roles evaluated differently
