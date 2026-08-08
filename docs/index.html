@@ -98,6 +98,12 @@
             font-weight: 700;
             background: #2c3e50;
             color: white;
+            position: relative;
+            cursor: help;
+        }
+        /* Tooltip için altı çizili efekt */
+        table.dataTable th[title] {
+            border-bottom: 1px dashed rgba(255,255,255,0.3);
         }
         table.dataTable td {
             font-size: 13px !important;
@@ -219,42 +225,42 @@
         <input type="text" id="customSearch" placeholder="🔍 Search player nickname... (e.g. fycnamed)">
     </div>
 
-    <!-- TABLE -->
+    <!-- TABLE - WITH TOOLTIP HEADERS -->
     <div class="table-responsive">
         <table id="playersTable" class="display compact stripe" style="width:100%">
             <thead>
                 <tr>
-                    <th class="col-rank">#</th>
-                    <th class="col-nick">Nick</th>
-                    <th class="col-userid">ID</th>
-                    <th class="col-rating">⭐</th>
-                    <th class="col-skill">Skill</th>
-                    <th class="col-multiplier">×</th>
-                    <th class="col-role">Role</th>
-                    <th class="col-tier">Tier</th>
-                    <th class="col-matches">M</th>
-                    <th class="col-wins">W</th>
-                    <th class="col-losses">L</th>
-                    <th class="col-winrate">W%</th>
-                    <th class="col-wlratio">W/L</th>
-                    <th class="col-goalspg">G/G</th>
-                    <th class="col-assistspg">A/G</th>
-                    <th class="col-savespg">S/G</th>
-                    <th class="col-ogpg">OG/G</th>
-                    <th class="col-totalgoals">TG</th>
-                    <th class="col-totalassists">TA</th>
-                    <th class="col-totalsaves">TS</th>
-                    <th class="col-totalog">TOG</th>
-                    <th class="col-mvpcount">MVP</th>
-                    <th class="col-mvpwin">MVP%</th>
-                    <th class="col-offensive">Off%</th>
-                    <th class="col-defensive">Def%</th>
-                    <th class="col-playmaker">Play%</th>
-                    <th class="col-efficiency">Eff</th>
-                    <th class="col-impact">Imp</th>
-                    <th class="col-gkindex">GK%</th>
-                    <th class="col-defenserel">DefR</th>
-                    <th class="col-totalactions">Act</th>
+                    <th class="col-rank" title="Rank position">#</th>
+                    <th class="col-nick" title="Player nickname">Nick</th>
+                    <th class="col-userid" title="User ID">ID</th>
+                    <th class="col-rating" title="Final rating score">⭐</th>
+                    <th class="col-skill" title="Raw skill score">Skill</th>
+                    <th class="col-multiplier" title="Experience multiplier">×</th>
+                    <th class="col-role" title="Tactical role">Role</th>
+                    <th class="col-tier" title="Performance tier">Tier</th>
+                    <th class="col-matches" title="Total matches played">M</th>
+                    <th class="col-wins" title="Total wins">W</th>
+                    <th class="col-losses" title="Total losses">L</th>
+                    <th class="col-winrate" title="Win rate percentage">W%</th>
+                    <th class="col-wlratio" title="Win/Loss ratio">W/L</th>
+                    <th class="col-goalspg" title="Goals per game average">G/G</th>
+                    <th class="col-assistspg" title="Assists per game average">A/G</th>
+                    <th class="col-savespg" title="Saves per game average">S/G</th>
+                    <th class="col-ogpg" title="Own goals per game average">OG/G</th>
+                    <th class="col-totalgoals" title="Total goals scored">TG</th>
+                    <th class="col-totalassists" title="Total assists made">TA</th>
+                    <th class="col-totalsaves" title="Total saves made">TS</th>
+                    <th class="col-totalog" title="Total own goals">TOG</th>
+                    <th class="col-mvpcount" title="Total MVP awards">MVP</th>
+                    <th class="col-mvpwin" title="MVP percentage per win">MVP%</th>
+                    <th class="col-offensive" title="Offensive contribution ratio">Off%</th>
+                    <th class="col-defensive" title="Defensive contribution ratio">Def%</th>
+                    <th class="col-playmaker" title="Playmaker contribution ratio">Play%</th>
+                    <th class="col-efficiency" title="Overall efficiency score">Eff</th>
+                    <th class="col-impact" title="Game impact score">Imp</th>
+                    <th class="col-gkindex" title="Goalkeeping index percentage">GK%</th>
+                    <th class="col-defenserel" title="Defense reliability score">DefR</th>
+                    <th class="col-totalactions" title="Total actions performed">Act</th>
                 </tr>
             </thead>
             <tbody id="tableBody">
