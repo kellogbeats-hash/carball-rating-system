@@ -1,3 +1,5 @@
+<div align="center">
+
 # MTA CarBall Derecelendirme Sistemi - Tam Puanlama Motoru
 
 ## Bu Belge Hakkında
@@ -124,7 +126,7 @@ son_yetenek = min(max(ham_yetenek, 1.0), 10.0)
 
 ---
 
-## 📈 DENEYİM ÇARPANI (0.0 - 1.15)
+## DENEYİM ÇARPANI (0.0 - 1.15)
 
 Deneyim çarpanı, daha fazla maç oynamış oyuncuları ödüllendirir. Deneyimin önemli olmasını sağlarken yeni oyuncuların da rekabet edebilmesine olanak tanır.
 
@@ -702,3 +704,5 @@ Sistem, oyuncu başına bu ham istatistikleri gerektirir:
 Bu belge, CarBall derecelendirme sisteminin tam, detaylı açıklamasını sunmaktadır. Tüm hesaplamalar doğrulama ve iyileştirme için açıktır.
 
 **Son Güncelleme:** Ağustos 2026
+
+</div>
