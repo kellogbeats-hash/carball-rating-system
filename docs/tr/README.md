@@ -1,10 +1,10 @@
-# 🚗 MTA CarBall Derecelendirme Sistemi - Tam Puanlama Motoru
+# MTA CarBall Derecelendirme Sistemi - Tam Puanlama Motoru
 
-## 📌 Bu Belge Hakkında
+## Bu Belge Hakkında
 
-Bu belge, FFS Gaming MTA San Andreas sunucusunda kullanılan CarBall oyuncu derecelendirme sisteminin **tam ve şeffaf bir açıklamasını** sunmaktadır.
+Bu belge, CarBall oyuncu derecelendirme sisteminin **tam ve şeffaf bir açıklamasını** sunmaktadır.
 
-**Amaç:** Oyuncu derecelendirmelerinin nasıl hesaplandığını tamamen açıklamak. Herkes bu sistemi inceleyebilir, anlayabilir ve kendi sunucusunda uygulayabilir.
+**Amaç:** Oyuncu derecelendirmelerinin nasıl hesaplandığını tamamen açıklamak.
 
 > **Not:** Bu, çalıştırılabilir bir yazılım projesi değil, hesaplama motorunun dokümantasyonudur. Mantık, herkesin sistemi doğrulayabilmesi ve anlayabilmesi için detaylı olarak açıklanmıştır.
 
@@ -132,7 +132,7 @@ Deneyim çarpanı, daha fazla maç oynamış oyuncuları ödüllendirir. Deneyim
 
 | Kademe | Maç | Çarpan Aralığı | Formül |
 |--------|-----|----------------|---------|
-| Gaziler | 10,000+ | 1.00 - 1.15 | 1.00 + ((maç-10000)/1500) × 0.015 (1.15 ile sınırlandırılmış) |
+| Doktora | 10,000+ | 1.00 - 1.15 | 1.00 + ((maç-10000)/1500) × 0.015 (1.15 ile sınırlandırılmış) |
 | Deneyimli | 5,000 - 9,999 | 0.85 - 0.99 | 0.85 + ((maç-5000)/5000) × 0.14 |
 | Yerleşik | 2,500 - 4,999 | 0.70 - 0.84 | 0.70 + ((maç-2500)/2500) × 0.15 |
 | Gelişmekte | 500 - 2,499 | 0.40 - 0.69 | 0.40 + ((maç-500)/2000) × 0.30 |
@@ -146,7 +146,7 @@ def deneyim_carpani_hesapla(toplam_maç):
     if toplam_maç == 0:
         return 0.0
     
-    # Gazi Kademesi: 10,000+ maç
+    # Doktora Kademesi: 10,000+ maç
     # 10k üzerindeki her 1500 maç +0.015 bonus verir
     # Maks sınır 1.15
     if toplam_maç >= 10000:
@@ -177,7 +177,7 @@ def deneyim_carpani_hesapla(toplam_maç):
 
 ### Bu Çarpan Neden Kullanılmalı?
 
-- **Uzun Ömürlülüğü Ödüllendirir:** Gaziler %15'e kadar bonus alır
+- **Uzun Ömürlülüğü Ödüllendirir:** Doktoralar %15'e kadar bonus alır
 - **Yeni Oyuncuları Teşvik Eder:** Yeni oyuncular çok sert cezalandırılmaz
 - **Kademeli İlerleme:** Kademeler arası sorunsuz ölçeklendirme
 - **Adil Sınır:** Hiç kimse 1.15x çarpanı aşamaz
@@ -199,15 +199,15 @@ Oyuncular, istatistiklerine göre 3 ana role ve alt kategorilere ayrılır. Bu, 
          │ > %55?              │
          └─────────────────────┘
               │            │
-             EVET          HAYIR
+             EVET         HAYIR
               │            │
               ▼            ▼
      ┌─────────────┐  ┌─────────────┐
      │ KALECİ      │  │ Gol/Asist   │
      │ Kategorisi  │  │ Oranı > 1.5 │
      └─────────────┘  │ VE Gol/Maç  │
-              │        │ >= 1.2?    │
-              │        └─────────────┘
+              │       │ >= 1.2?     │
+              │       └─────────────┘
               │              │            │
               │             EVET         HAYIR
               │              │            │
@@ -219,7 +219,7 @@ Oyuncular, istatistiklerine göre 3 ana role ve alt kategorilere ayrılır. Bu, 
               │
               ▼
          ┌─────────────┐
-         │ Gazi Etiketi│
+         │ Doktora Etiketi│
          │ Uygula (eğer│
          │ 10K+ Maç)  │
          └─────────────┘
@@ -297,7 +297,7 @@ else:
         rol = "Her Yönüyle Orta Saha"
 ```
 
-### Gazi Etiketi
+### Doktora Etiketi
 
 10,000+ maçı olan oyuncular rollerine "☣️ 10K+ Maç" etiketi alır:
 
@@ -398,7 +398,7 @@ maç_başına_kendi_kalesine_gol = 0.1583 ≥ 0.55 → YANLIŞ
 
 # → Pasif Kaleci
 
-# Gazi Kontrolü
+# Doktora Kontrolü
 toplam_maç = 10,255 ≥ 10,000 → ✓
 
 # SON ROL:
@@ -440,7 +440,7 @@ son_yetenek = min(max(7.8779, 1.0), 10.0) = 7.8779
 ### Adım 6: Deneyim Çarpanını Hesapla
 
 ```python
-toplam_maç = 10,255 ≥ 10,000 → Gazi Kademesi
+toplam_maç = 10,255 ≥ 10,000 → Doktora Kademesi
 
 ekstra_maç = 10,255 - 10,000 = 255
 bonus = (255 / 1500) × 0.015 = 0.0026
@@ -544,7 +544,7 @@ MVP: 1481 (%34)
 5. BELİRLE: Taktik Rol
    - Kaleci / Forvet / Oyun Kurucu
    - Alt kategori
-   - Gazi etiketi (eğer 10K+ maç varsa)
+   - Doktora etiketi (eğer 10K+ maç varsa)
    ↓
 6. HESAPLA: Ham Yetenek (6 bileşen)
    ↓
@@ -582,7 +582,7 @@ MVP: 1481 (%34)
 
 ### 3. Deneyim Önemlidir
 
-- Gaziler tanınır (10K+ etiketi)
+- Doktoralar tanınır (10K+ etiketi)
 - Çarpan uzun ömürlülüğü ödüllendirir
 - Yeni oyuncular çok sert cezalandırılmaz
 
@@ -617,7 +617,7 @@ MVP: 1481 (%34)
 | Kalecilik İndeksi | Kurtarış olan aksiyonların yüzdesi |
 | Savunma Güvenilirliği | Kendi kalesine gol başına kurtarış |
 | Gol/Asist Oranı | Gollerin asistlere bölümü |
-| Gazi | 10,000+ maçı olan oyuncu |
+| Doktora | 10,000+ maçı olan oyuncu |
 | Kademe | Puana göre harf notu (S'den E'ye) |
 
 ---
@@ -698,7 +698,7 @@ Sistem, oyuncu başına bu ham istatistikleri gerektirir:
 
 - **Kapsamlı:** Hücum, savunma ve etkiyi kapsar
 - **Rol Bilinçli:** Farklı roller farklı değerlendirilir
-- **Deneyim Tabanlı:** Gazileri uygun şekilde ödüllendirir
+- **Deneyim Tabanlı:** Doktoraları uygun şekilde ödüllendirir
 - **Adil:** Tüm oyuncular için eşit fırsat
 - **Şeffaf:** Tüm hesaplamalar herkese açıktır
 - **Sınırlandırılmış:** Sonsuz ölçeklendirme yok
