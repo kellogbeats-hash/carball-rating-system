@@ -132,7 +132,7 @@ Experience multiplier rewards players who have played more matches. It ensures t
 
 | Tier | Matches | Multiplier Range | Formula |
 |------|---------|------------------|---------|
-| Veteran | 10,000+ | 1.00 - 1.15 | 1.00 + ((games-10000)/1500) × 0.015 (capped at 1.15) |
+| Doctorate | 10,000+ | 1.00 - 1.15 | 1.00 + ((games-10000)/1500) × 0.015 (capped at 1.15) |
 | Experienced | 5,000 - 9,999 | 0.85 - 0.99 | 0.85 + ((games-5000)/5000) × 0.14 |
 | Established | 2,500 - 4,999 | 0.70 - 0.84 | 0.70 + ((games-2500)/2500) × 0.15 |
 | Developing | 500 - 2,499 | 0.40 - 0.69 | 0.40 + ((games-500)/2000) × 0.30 |
@@ -146,7 +146,7 @@ def calculate_experience_multiplier(total_games):
     if total_games == 0:
         return 0.0
     
-    # Veteran Tier: 10,000+ matches
+    # Doctorate Tier: 10,000+ matches
     # Each 1500 matches above 10k gives +0.015 bonus
     # Max cap is 1.15
     if total_games >= 10000:
@@ -177,7 +177,7 @@ def calculate_experience_multiplier(total_games):
 
 ### Why This Multiplier?
 
-- **Rewards Longevity:** Veterans get up to 15% bonus
+- **Rewards Longevity:** Doctorates get up to 15% bonus
 - **Encourages New Players:** New players aren't punished too harshly
 - **Gradual Progression:** Smooth scaling between tiers
 - **Fair Cap:** No one can exceed 1.15x multiplier
@@ -206,8 +206,8 @@ Players are classified into 3 main roles with sub-categories based on their stat
      │ GOALKEEPER  │  │ Goal/Assist │
      │  Category   │  │ Ratio > 1.5 │
      └─────────────┘  │ AND Goals/G │
-              │        │ >= 1.2?    │
-              │        └─────────────┘
+              │       │ >= 1.2?     │
+              │       └─────────────┘
               │              │            │
               │             YES           NO
               │              │            │
@@ -220,7 +220,7 @@ Players are classified into 3 main roles with sub-categories based on their stat
               ▼
          ┌─────────────┐
          │ Apply       │
-         │ Veteran     │
+         │ Doctorate     │
          │ Label if    │
          │ 10K+ Matches│
          └─────────────┘
@@ -298,7 +298,7 @@ else:
         role = "All-Round Midfielder"
 ```
 
-### Veteran Label
+### Doctorate Label
 
 Players with 10,000+ matches get the "☣️ 10K+ Match" label added to their role:
 
@@ -399,7 +399,7 @@ own_goals_per_game = 0.1583 ≥ 0.55 → FALSE
 
 # → Passive Goalkeeper
 
-# Veteran Check
+# Doctorate Check
 total_games = 10,255 ≥ 10,000 → ✓
 
 # FINAL ROLE:
@@ -441,7 +441,7 @@ final_skill = min(max(7.8779, 1.0), 10.0) = 7.8779
 ### Step 6: Calculate Experience Multiplier
 
 ```python
-total_games = 10,255 ≥ 10,000 → Veteran Tier
+total_games = 10,255 ≥ 10,000 → Doctorate Tier
 
 extra_games = 10,255 - 10,000 = 255
 bonus = (255 / 1500) × 0.015 = 0.0026
@@ -545,7 +545,7 @@ Stats: Saves: 19651 - Goals: 6528 - Assists: 3398 - Own Goals: 1623
 5. DETERMINE: Tactical Role
    - Goalkeeper / Striker / Playmaker
    - Sub-category
-   - Veteran label (if 10K+ matches)
+   - Doctorate label (if 10K+ matches)
    ↓
 6. CALCULATE: Raw Skill (6 components)
    ↓
@@ -583,7 +583,7 @@ Stats: Saves: 19651 - Goals: 6528 - Assists: 3398 - Own Goals: 1623
 
 ### 3. Experience Matters
 
-- Veterans get recognition (10K+ label)
+- Doctorates get recognition (10K+ label)
 - Multiplier rewards longevity
 - New players aren't punished too harshly
 
@@ -618,7 +618,7 @@ Stats: Saves: 19651 - Goals: 6528 - Assists: 3398 - Own Goals: 1623
 | Goalkeeping Index | Percentage of actions that are saves |
 | Defense Reliability | Saves per own goal |
 | Goal/Assist Ratio | Goals divided by assists |
-| Veteran | Player with 10,000+ matches |
+| Doctorate | Player with 10,000+ matches |
 | Tier | Letter grade (S to E) based on rating |
 
 ---
@@ -699,7 +699,7 @@ The system requires these raw statistics per player:
 
 - **Comprehensive:** Covers attack, defense, and impact
 - **Role-Aware:** Different roles evaluated differently
-- **Experience-Based:** Rewards veterans appropriately
+- **Experience-Based:** Rewards Doctorates appropriately
 - **Fair:** Equal opportunity for all players
 - **Transparent:** All calculations are public
 - **Capped:** No infinite scaling
