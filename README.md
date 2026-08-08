@@ -1,6 +1,6 @@
 <div align="center">
 
-# MTA CarBall Rating System
+# FFS Gaming CarBall Rating System
 
 [![English](https://img.shields.io/badge/🇬🇧_English-README-blue?style=for-the-badge)](docs/en/README.md)
 [![Türkçe](https://img.shields.io/badge/🇹🇷_Türkçe-README-red?style=for-the-badge)](docs/tr/README.md)
